@@ -13,11 +13,11 @@ public class C_DISENIO_COLOR {
     private Connection conn = ObjConn.getConexion(); // llamar la conexion 
     private PreparedStatement ps = null; // preparar la query
     private ResultSet rs = null; // Se va a guardar el resultado de la query
-    
+    String Rcolor = "";
     private String SQL = "select DIS_COLOR from DISENIO_COLOR ";    
     private String SQL_INSERT = "UPDATE DISENIO_COLOR  SET DIS_COLOR = ? WHERE id_disenio_color = 1";   
     
-    String Rcolor = "";
+    
 
     
     public String Color(){
@@ -26,17 +26,13 @@ public class C_DISENIO_COLOR {
     
             ps = conn.prepareStatement(SQL);
             rs = ps.executeQuery();
-            
             while (rs.next()) {
-              
                 Rcolor = rs.getString("DIS_COLOR");
-                
             }
             
             ps.close();
-            
-            return Rcolor ;
-            
+
+            return Rcolor ; 
         } catch (Exception e) { }
         
         return Rcolor;
@@ -56,8 +52,6 @@ public class C_DISENIO_COLOR {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,"ERROR : "+e+"");
         }
-        
-
     }
     
 }

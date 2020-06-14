@@ -43,11 +43,11 @@ public class V_ADMIN extends javax.swing.JFrame {
        
        modelo.setRowCount(0);
        TotalPendientesUsuarios = ADM.CountUser();
-       TotalUsuarios = ADM.CountUserTotal();
+       TotalUsuarios = ADM.Contar_Total_usuarios();
        
        
        
-       rs = ADM.Usuarios(); 
+       rs = ADM.Listar_Usuarios(); 
                
        Txt_Usu_Pend_1.setText(TotalPendientesUsuarios);
        Txt_Usu_Pend_2.setText(TotalUsuarios);

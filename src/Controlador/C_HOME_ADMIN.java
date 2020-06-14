@@ -47,7 +47,7 @@ public class C_HOME_ADMIN {
         return TOTAL_PENDIENTES;
     }
     
-    public String CountUserTotal(){
+    public String Contar_Total_usuarios(){
         
         try {
             
@@ -66,7 +66,7 @@ public class C_HOME_ADMIN {
         return TOTAL;
     }
         
-    public ResultSet Usuarios(){
+    public ResultSet Listar_Usuarios(){
             
         try {     
             

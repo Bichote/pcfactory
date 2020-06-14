@@ -199,7 +199,29 @@ public class V_LOGIN extends javax.swing.JFrame {
 
                     if (Resultado == 1) {     
 
-                        JOptionPane.showMessageDialog(null, "Bienvenido") ;
+                        int Resultado_Filtro = Login.Filtro_Rol(rut);
+                        if (Resultado_Filtro==1) {
+                            
+                            V_ADMIN V_A = new V_ADMIN();
+                            V_A.setVisible(true);
+                            this.dispose();
+                        }
+                        if (Resultado_Filtro==2) {
+                            
+                            V_VENDEDOR V_V = new V_VENDEDOR();
+                            V_V.setVisible(true);
+                            this.dispose();
+                        }
+                        if (Resultado_Filtro==3) {
+                             JOptionPane.showMessageDialog(null, "CUENTA DESACTIVADA , COMUNIQUESE CON EL ADMIN");
+                        }
+                        if (Resultado_Filtro==4) {
+                          
+                            V_CAJERO V_C = new V_CAJERO();
+                            V_C.setVisible(true);
+                            this.dispose();
+                        }
+                        
 
                     } 
                     
