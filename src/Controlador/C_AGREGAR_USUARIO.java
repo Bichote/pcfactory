@@ -54,7 +54,5 @@ public class C_AGREGAR_USUARIO {
         }
         return validar_login;
     }
-        
 
-    
 }

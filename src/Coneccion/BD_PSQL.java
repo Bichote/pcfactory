@@ -14,14 +14,9 @@ public class BD_PSQL {
    public Connection getConexion(){
        
       try { 
-          con = (Connection) DriverManager.getConnection(URL,USER,PASS);
-          System.out.println("Conecto");
-        
-        } 
-        catch(SQLException e){  System.err.println(e); } 
-      
+        con = DriverManager.getConnection(URL,USER,PASS);
+       } catch(SQLException e){  System.err.println(e); }    
         return con;
-
     } 
 
      

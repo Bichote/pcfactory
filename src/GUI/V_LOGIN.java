@@ -3,16 +3,30 @@ package GUI;
 
 import Controlador.C_HASH;
 import Controlador.C_LOGIN;
+import Controlador.C_RUTIFICADOR;
+import java.util.prefs.Preferences;
 import javax.swing.JOptionPane;
-
 public class V_LOGIN extends javax.swing.JFrame {
 
     C_LOGIN Login = new C_LOGIN();
-    int Resultado = 0; 
+    C_RUTIFICADOR VALIDACION_RUT = new C_RUTIFICADOR();
     C_HASH Hash = new C_HASH();
+    V_ADMIN V_A = new V_ADMIN();
+    V_VENDEDOR V_V = new V_VENDEDOR();
+    V_CAJERO V_C = new V_CAJERO();
+    
+    int rs_rol = 0; 
+    boolean rs_rutificador = false;
+    int rs_login = 0;
+    
+    String Pass_imcriptada = "";
+    
     
     public V_LOGIN() {
         initComponents();
+        // RS LOGIN 1  == SI EXISTE EL USUARIO HAY QUE PREGUNTAR EL ROL 
+        // RS LOGIN 0  == NO EXISTE EL USUARIO O CREDENCIALES INCORRECTAS
+        // RS LOGIN 3  == LA  CUENTA ESTA DESACTIVADA
     }
 
     @SuppressWarnings("unchecked")
@@ -164,78 +178,67 @@ public class V_LOGIN extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void vista_rol(String rut){
+  
+        if(rs_login == 0){
+            
+            JOptionPane.showMessageDialog(null, "Credenciales incorrecta") ;
+        }
+        
+        if (rs_login == 1) {     
+            
+            int rs_rol  = Login.Filtro_Rol(rut);
+            
+            if (rs_rol == 1 ) { // RS_ROL 1 = ADMINISTRADOR
+                V_A.setVisible(true);
+                V_A.User.setText("donwea");
+                this.dispose();
+            } else
+            
+            if (rs_rol == 2 ) { // RS_ROL 2 = VENDEDOR
+                V_V.setVisible(true);
+                this.dispose();
+            } else
+            
+            if (rs_rol == 3 ) { // RS_ROL 3 = CUENTA DESACTIVADA
+                JOptionPane.showMessageDialog(null, "CUENTA DESACTIVADA , COMUNIQUESE CON EL ADMIN");
+            } else
+            
+            if (rs_rol == 4 ) { // RS_ROL 4 = CUENTA CAJERO
+                V_C.setVisible(true);
+                this.dispose();
+            }          
+        } 
+
+        if(rs_login == 3){
+            JOptionPane.showMessageDialog(null, "Cuenta desactivada") ;
+        }
+        
+    }
+    
     private void Btn_Pass_ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Pass_ActionPerformed
-       
-       
-        String rut = Txt_rut_.getText();
-        String Pass = new String(Txt_Pass_.getPassword());
-        
-        String NuevaPass =  Hash.sha1(Pass); // ENVIAR LA PASS PARA INCRIPTARLA (PASS) // NUEVAPASS = CONTRASEÑA IMCRIPTADA
-        
+
+        String rut = Txt_rut_.getText(); // pasar rut a variable rut
+        String Pass = new String(Txt_Pass_.getPassword()); // pasar password a variable pass
+
         if (Pass.equals("") || rut.equals("")) {
             
             JOptionPane.showMessageDialog(null, "Complete los campos") ;
             
         } else {
-
-            //Rutificador
-
-            rut = rut.toUpperCase();
-            rut = rut.replace(".", "");
-            rut = rut.replace("-", "");
-
-            int rutAux = Integer.parseInt(rut.substring(0, rut.length() - 1));
-            char dv = rut.charAt(rut.length() - 1);
-
-            int m = 0, s = 1;
             
-            for (; rutAux != 0; rutAux /= 10) {
+            Pass_imcriptada =  Hash.sha1(Pass); // ENVIAR LA PASS PARA INCRIPTARLA (PASS) // NUEVAPASS = CONTRASEÑA IMCRIPTADA
+            rs_rutificador = VALIDACION_RUT.rutificador(rut); //Rutificador
+ 
+            if (rs_rutificador == true) {
                 
-            s = (s + rutAux % 10 * (9 - m++ % 6)) % 11; }
-            
-                if (dv == (char) (s != 0 ? s + 47 : 75))  {  // Si el rut es correcto
-
-                    Resultado = Login.login(rut,NuevaPass);  // ------------ llamar a la funcion -subclase del login // Recibir la respuesta  // Enviar el rut y pass por parametro
-
-                    if (Resultado == 1) {     
-
-                        int Resultado_Filtro = Login.Filtro_Rol(rut);
-                        if (Resultado_Filtro==1) {
-                            
-                            V_ADMIN V_A = new V_ADMIN();
-                            V_A.setVisible(true);
-                            this.dispose();
-                        }
-                        if (Resultado_Filtro==2) {
-                            
-                            V_VENDEDOR V_V = new V_VENDEDOR();
-                            V_V.setVisible(true);
-                            this.dispose();
-                        }
-                        if (Resultado_Filtro==3) {
-                             JOptionPane.showMessageDialog(null, "CUENTA DESACTIVADA , COMUNIQUESE CON EL ADMIN");
-                        }
-                        if (Resultado_Filtro==4) {
-                          
-                            V_CAJERO V_C = new V_CAJERO();
-                            V_C.setVisible(true);
-                            this.dispose();
-                        }
-                        
-
-                    } 
-                    
-                    if(Resultado == 0){
-                         JOptionPane.showMessageDialog(null, "Credenciales incorrecta") ;
-                    }
-                    
-                    if(Resultado == 3){
-                         JOptionPane.showMessageDialog(null, "Cuenta desactivada") ;
-                    }
+                rs_login = Login.login(rut,Pass_imcriptada);  // ------------ llamar a la funcion -subclase del login // Recibir la respuesta  // Enviar el rut y pass por parametro
+                vista_rol(rut);
                 
-                } // Si el rut es incorrecto//
-                else {  JOptionPane.showMessageDialog(null, "Rut invalido") ; }
-            
+            } else {
+                JOptionPane.showMessageDialog(null, "Rut invalido") ;
+            }
+  
         }
 
     }//GEN-LAST:event_Btn_Pass_ActionPerformed

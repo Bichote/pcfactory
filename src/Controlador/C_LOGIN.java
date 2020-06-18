@@ -31,26 +31,24 @@ public class C_LOGIN {
             
             while (rs.next()) {
                 
-                String tipo = rs.getString("TIPO");
-                System.err.println(tipo);
-              
-                
-                if (rs.getString("ID").equals("1")) {
+                String tipo = rs.getString("TIPO"); // TIPO_ROL
+    
+                if (rs.getString("ID").equals("1")) { 
 
-                    if (tipo.equals("3")) {
+                    if (tipo.equals("3")) { // DESACTIVADO
                        
                         Rquery = 3 ;
                           
                     } else {
                         
-                        Rquery = 1 ; 
-                    }
+                        Rquery = 1 ;    // YA EXISTE
+                }
  
                 return Rquery;
                      
                 } else{
                     
-                    Rquery = 0 ;
+                    Rquery = 0 ; // REGISTRA
                   
                 }
             }
@@ -87,7 +85,5 @@ public class C_LOGIN {
         
        return Fquerty;
     }
-    
-    
-    
+  
 }

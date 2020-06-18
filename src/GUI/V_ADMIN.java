@@ -23,7 +23,9 @@ public class V_ADMIN extends javax.swing.JFrame {
     String TotalPendientesUsuarios = "";
     String TotalUsuarios = "";
     C_HOME_ADMIN ADM =  new C_HOME_ADMIN();
+
     
+   
     
     DefaultTableModel modelo = new DefaultTableModel(){
         
@@ -38,6 +40,7 @@ public class V_ADMIN extends javax.swing.JFrame {
         Grafico_Barra_Producto();
         Grafico_3D_Producto();
         Usuarios();
+ 
     }
     public void Usuarios(){
        
@@ -165,6 +168,7 @@ public class V_ADMIN extends javax.swing.JFrame {
         PANEL_INFO = new javax.swing.JPanel();
         CB_OSCURO_ = new javax.swing.JCheckBox();
         CB_BLANCO_ = new javax.swing.JCheckBox();
+        User = new javax.swing.JLabel();
         PANEL_CONTENEDOR = new javax.swing.JPanel();
         PANEL_GRAFICOS = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -224,15 +228,20 @@ public class V_ADMIN extends javax.swing.JFrame {
             PANEL_INFOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PANEL_INFOLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CB_BLANCO_)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(CB_OSCURO_)
+                .addGroup(PANEL_INFOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(User, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PANEL_INFOLayout.createSequentialGroup()
+                        .addComponent(CB_BLANCO_)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(CB_OSCURO_)))
                 .addContainerGap())
         );
         PANEL_INFOLayout.setVerticalGroup(
             PANEL_INFOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PANEL_INFOLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
+                .addComponent(User, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(PANEL_INFOLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CB_OSCURO_)
                     .addComponent(CB_BLANCO_))
@@ -258,7 +267,7 @@ public class V_ADMIN extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(15, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(PANEL_GRAFICO_BARRA_MES, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(PANEL_GRAFICO_CATEGORIA, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -411,7 +420,7 @@ public class V_ADMIN extends javax.swing.JFrame {
                                 .addGroup(PANEL_EDITARLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PANEL_EDITARLayout.createSequentialGroup()
                                         .addComponent(BTN_Eliminar_)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 302, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 297, Short.MAX_VALUE)
                                         .addComponent(Txt_titulos2))
                                     .addGroup(PANEL_EDITARLayout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
@@ -460,7 +469,7 @@ public class V_ADMIN extends javax.swing.JFrame {
         PANEL_USUARIOS.setLayout(PANEL_USUARIOSLayout);
         PANEL_USUARIOSLayout.setHorizontalGroup(
             PANEL_USUARIOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1058, Short.MAX_VALUE)
+            .addGap(0, 1053, Short.MAX_VALUE)
             .addGroup(PANEL_USUARIOSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(PANEL_USUARIOSLayout.createSequentialGroup()
                     .addContainerGap()
@@ -487,7 +496,7 @@ public class V_ADMIN extends javax.swing.JFrame {
         PANEL_HOME.setLayout(PANEL_HOMELayout);
         PANEL_HOMELayout.setHorizontalGroup(
             PANEL_HOMELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1058, Short.MAX_VALUE)
+            .addGap(0, 1053, Short.MAX_VALUE)
         );
         PANEL_HOMELayout.setVerticalGroup(
             PANEL_HOMELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -733,6 +742,7 @@ public class V_ADMIN extends javax.swing.JFrame {
     private javax.swing.JLabel Txt_titulos;
     private javax.swing.JLabel Txt_titulos2;
     private javax.swing.JLabel Txt_titulos3;
+    public static javax.swing.JLabel User;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
